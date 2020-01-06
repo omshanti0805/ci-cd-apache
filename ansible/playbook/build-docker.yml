@@ -1,35 +1,44 @@
 ---
 
-- name: Ansible copy directory to the remote server
-  hosts: appserver2
+- name: Copy and run Docker Compose on remote Server
+  hosts: appserver1
   tasks:
+  
+  - name: Ansible Docker-Compose file to remote server
+    copy:
+      src: /mnt/data/jenkins/workspace/ansible-test/ansible/playbook/
+      dest: /home/ubuntu/
+      mode: a+w
+      force: yes
+    become: true
+
+  
   - name: Docker Compose down
     docker_compose:
-      project_src: /home/ubuntu/Docs
+      project_src: /home/ubuntu/
       state: absent
     register: output
     become: yes
-
   - debug:
       var: output
 
   - name: Docker Compose up
     docker_compose:
-      project_src: /home/ubuntu/Docs
+      project_src: /home/ubuntu/
       build: no
       state: present
     register: output
     become: yes
+  - debug:
+      var: output
 
-  - debug:
-      var: output
-  - name: Prune everything
-    docker_prune:
-      images: yes
-    become: yes
-    register: output
-  - debug:
-      var: output
+#  - name: Prune everything
+#    docker_prune:
+#      images: yes
+#    become: yes
+#    register: output
+#  - debug:
+#      var: output
 
   become: yes
 
