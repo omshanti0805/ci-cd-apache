@@ -14,11 +14,7 @@ services:
       - ./proxy2/hariom.tkinteractive.com/public_html/:/var/www/hariom.tkinteractive.com/public_html/
     container_name: apache-php2
     restart: always
-
-  puppeter:
-    build: ./new-browsershot
-    container_name: puppet_1
-    
+   
   reverseproxy:
     build: .
     ports: 
