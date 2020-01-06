@@ -1,0 +1,20 @@
+version: "3.2"
+services:
+
+  apache1:
+    image: india2022/stageapp-php7:v2
+    container_name: apache-php1
+    restart: always
+    
+  apache2:
+    image: india2022/stageapp-php5:v2
+    container_name: apache-php2
+    restart: always
+   
+  reverseproxy:
+    image: india2022/reverse-proxy-apache:v2
+    ports: 
+      - 80:80
+      - 3307:3306
+    container_name:  reverseproxy_container
+    restart: always
