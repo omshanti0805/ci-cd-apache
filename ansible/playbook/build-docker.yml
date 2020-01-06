@@ -1,12 +1,12 @@
 ---
 
-- name: Copy and run Docker Compose on remote Server
+- name: Ansible copy directory to the remote server
   hosts: appserver1
   tasks:
   
   - name: Ansible Docker-Compose file to remote server
     copy:
-      src: /mnt/data/jenkins/workspace/ansible-test/ansible/playbook/
+      src: /mnt/data/jenkins/workspace/ansible-test/ansible/script/
       dest: /home/ubuntu/
       mode: a+w
       force: yes
