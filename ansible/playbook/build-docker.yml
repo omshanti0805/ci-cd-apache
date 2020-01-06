@@ -1,0 +1,35 @@
+---
+
+- name: Ansible copy directory to the remote server
+  hosts: appserver2
+  tasks:
+  - name: Docker Compose down
+    docker_compose:
+      project_src: /home/ubuntu/Docs
+      state: absent
+    register: output
+    become: yes
+
+  - debug:
+      var: output
+
+  - name: Docker Compose up
+    docker_compose:
+      project_src: /home/ubuntu/Docs
+      build: no
+      state: present
+    register: output
+    become: yes
+
+  - debug:
+      var: output
+  - name: Prune everything
+    docker_prune:
+      images: yes
+    become: yes
+    register: output
+  - debug:
+      var: output
+
+  become: yes
+
