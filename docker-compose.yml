@@ -2,6 +2,7 @@ version: "3.2"
 services:
 
   apache1:
+    image: php7_img:v1
     build: ./proxy
     volumes:
       - ./proxy/dummy.tkinteractive.com/public_html/:/var/www/dummy.tkinteractive.com/public_html/
@@ -9,6 +10,7 @@ services:
     restart: always
     
   apache2:
+    image: php5_img:v1
     build: ./proxy2
     volumes:
       - ./proxy2/hariom.tkinteractive.com/public_html/:/var/www/hariom.tkinteractive.com/public_html/
@@ -16,6 +18,7 @@ services:
     restart: always
    
   reverseproxy:
+    image: apache_rev:v1
     build: .
     ports: 
       - 80:80
