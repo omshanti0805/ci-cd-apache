@@ -1,23 +1,23 @@
 ---
 
-- name: Ansible setuo on the remote server
+- name: Ansible copy directory to the remote server
   hosts: appserver1
-  tasks:
+  tasks:  
   - name: Install docker-compose python module
-  pip:
-    name: 
-      - docker
-      - docker-compose
-    state: present
-  become: yes
+    pip:
+      name: 
+        - docker
+        - docker-compose
+      state: present
+    become: yes
 
   - name: Create and start Compose services
-  docker_compose:
+    docker_compose:
     project_src: /home/ubuntu
-    state: present 
+    state: present
+    become: yes
   register: output
   become: yes
-
   - debug:
     var: output 
   
