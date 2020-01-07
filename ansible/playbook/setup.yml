@@ -13,13 +13,12 @@
 
   - name: Create and start Compose services
     docker_compose:
-    project_src: /home/ubuntu
-    state: present
+      project_src: /home/ubuntu
+      state: present
     become: yes
-  register: output
-  become: yes
+    register: output
   - debug:
-    var: output 
+      var: output 
   
 
 
