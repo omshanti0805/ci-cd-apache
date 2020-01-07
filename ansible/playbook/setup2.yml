@@ -81,6 +81,7 @@
       source: pull
   - docker_container:
       name: hello-world
+      image: hello-world
       state: started
 
   
