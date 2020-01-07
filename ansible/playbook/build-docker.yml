@@ -18,7 +18,7 @@
       project_src: /home/ubuntu/
       state: absent
     register: output
-    become: yes
+    become: true
   - debug:
       var: output
 
@@ -28,7 +28,7 @@
       build: no
       state: present
     register: output
-    become: yes
+    become: true
   - debug:
       var: output
 
@@ -40,5 +40,5 @@
 #  - debug:
 #      var: output
 
-  become: yes
+  become: true
 
