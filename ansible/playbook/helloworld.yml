@@ -1,6 +1,11 @@
-- docker_image:
-    name: hello-world
-    source: pull
-- docker_container:
-    name: hello-world
-    state: started
+---
+
+- name: Ansible copy directory to the remote server
+  hosts: appserver1
+  tasks:
+    - docker_image:
+        name: hello-world
+        source: pull
+    - docker_container:
+        name: hello-world
+        state: started
