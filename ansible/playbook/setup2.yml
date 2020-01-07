@@ -1,79 +1,86 @@
-##### provision brand new ubuntu 18.04 server
+---
 
-# ...
-
+- name: Ansible setup on the remote server
+  hosts: appserver1
+  tasks:  
+  
 ##### setup group and user
+  
+  - name: create docker group
+    become: true
+    group:
+      name: docker
+      state: present
 
-- name: create docker group
-  become: true
-  group:
-    name: docker
-    state: present
+  - name: add user to group 
+    become: true
+    user:
+      name: "{{ansible_user}}"
+      groups: docker
+      append: true
 
-- name: add user to group 
-  become: true
-  user:
-    name: "{{ansible_user}}"
-    groups: docker
-    append: true
-
-- meta: reset_connection                # <--- must do this if using pipelining
+  - meta: reset_connection                # <--- must do this if using pipelining
 
 ##### setup docker
 
-- name: install packages required by docker
-  become: true
-  apt:
-    update_cache: yes
-    state: latest
-    name:
-    - apt-transport-https
-    - ca-certificates
-    - curl
-    - gpg-agent
-    - software-properties-common
+  - name: install packages required by docker
+    become: true
+    apt:
+      update_cache: yes
+      state: latest
+      name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gpg-agent
+      - software-properties-common
 
-- name: add docker GPG key
-  become: true
-  apt_key:
-    url: https://download.docker.com/linux/ubuntu/gpg
-    state: present
+  - name: add docker GPG key
+    become: true
+    apt_key:
+      url: https://download.docker.com/linux/ubuntu/gpg
+      state: present
 
-- name: add docker apt repo
-  become: true
-  apt_repository:
-    repo: deb https://download.docker.com/linux/ubuntu bionic stable
-    state: present
+  - name: add docker apt repo
+    become: true
+    apt_repository:
+      repo: deb https://download.docker.com/linux/ubuntu bionic stable
+      state: present
 
-- name: install docker
-  become: true
-  apt:
-    update_cache: yes
-    state: latest
-    name:
-    - docker-ce
-    - docker-ce-cli
-    - containerd.io
+  - name: install docker
+    become: true
+    apt:
+      update_cache: yes
+      state: latest
+      name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
 
 ##### setup ansible <---> docker
 
-- name: install python dependencies
-  become: true
-  apt:
-    update_cache: yes
-    state: latest
-    name: python3-pip
+  - name: install python dependencies
+    become: true
+    apt:
+      update_cache: yes
+      state: latest
+      name: python3-pip
 
-- name: install 'Docker SDK for Python'
-  #become: true               <--- DO NOT DO THIS!!!
-  pip:
-    name: docker
+  - name: install 'Docker SDK for Python'
+    #become: true               <--- DO NOT DO THIS!!!
+    pip:
+      name: 
+        - docker
+        - docker-compose
+      state: present
 
 ##### test
 
-- docker_image:
-    name: hello-world
-    source: pull
-- docker_container:
-    name: hello-world
-    state: started
+  - docker_image:
+      name: hello-world
+      source: pull
+  - docker_container:
+      name: hello-world
+      state: started
+
+  
