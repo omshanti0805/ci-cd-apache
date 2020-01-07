@@ -1,7 +1,9 @@
+---
 
-
-
-- name: Install docker-compose python module
+- name: Ansible setuo on the remote server
+  hosts: appserver1
+  tasks:
+  - name: Install docker-compose python module
   pip:
     name: 
       - docker
@@ -9,13 +11,15 @@
     state: present
   become: yes
 
-- name: Create and start Compose services
+  - name: Create and start Compose services
   docker_compose:
-    project_src: /home/ubuntu/Docs/code
+    project_src: /home/ubuntu
     state: present 
   register: output
   become: yes
 
-- debug:
+  - debug:
     var: output 
   
+
+
