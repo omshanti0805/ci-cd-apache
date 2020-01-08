@@ -15,10 +15,8 @@
       restarted: yes
       build: no
     register: output
-    become: yes
   - debug:
-      var: output
-  become: yes          
+      var: output        
 
 
 
