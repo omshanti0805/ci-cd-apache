@@ -83,4 +83,7 @@
       name: hello-world
       image: hello-world
       state: started
-      output_logs: yes
+    register: output
+  - debug:
+      var: output
+
