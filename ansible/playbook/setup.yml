@@ -97,7 +97,7 @@
 
   - name: Docker Compose up
     docker_compose:
-      project_src: /home/ubuntu/
+      project_src: /home/ubuntu
       build: no
       state: present
     register: output
