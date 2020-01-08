@@ -14,26 +14,17 @@
       project_src: /home/ubuntu/
       restarted: yes
       build: no
-    register: docker_container_output
-    #   become: yes            ------------- Do not use this!
+    register: output
+    #   become: yes            ------------- Do not use this
+  - debug:
+      var: output        
 
-  - name: Show test output
-    debug:
-      msg: "{{ docker_container_output.ansible_facts.docker_container.Output }}"
-      
-
-#    register: output
-#  - debug:
-#      var: output        
-
-
-
-#  - name: Prune everything
-#    docker_prune:
-#      images: yes
-#    become: yes
-#    register: output
-#  - debug:
-#      var: output
+  - name: Prune everything
+    docker_prune:
+      images: yes
+    become: yes
+    register: output
+  - debug:
+      var: output
 
 
