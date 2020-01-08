@@ -83,7 +83,9 @@
       name: hello-world
       image: hello-world
       state: started
-    register: output
-  - debug:
-      var: output
+      detach: false
+    register: docker_container_output
 
+  - name: Show test output
+    debug:
+      msg: "{{ docker_container_output.ansible_facts.docker_container.Output }}"
