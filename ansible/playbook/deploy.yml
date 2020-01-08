@@ -22,7 +22,7 @@
   - name: Prune everything
     docker_prune:
       images: yes
-    become: yes
+  # become: yes
     register: output
   - debug:
       var: output
