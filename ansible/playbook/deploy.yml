@@ -1,6 +1,6 @@
 ---
 
-- name: Ansible copy directory to the remote server
+- name: Start project containers on app server
   hosts: appserver1
   tasks:
   
@@ -11,16 +11,6 @@
       mode: a+w
       force: yes
     become: true
-
-  
-  - name: Docker Compose down
-    docker_compose:
-      project_src: /home/ubuntu/
-      state: absent
-    register: output
-    become: true
-  - debug:
-      var: output
 
   - name: Docker Compose up
     docker_compose:
