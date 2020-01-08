@@ -2,7 +2,7 @@ version: "3.2"
 services:
 
   apache1:
-    image: india2022/stageapp-php7:${php7_version:-latest}
+    image: "india2022/stageapp-php7:${php7_version:-latest}"
     build: ./proxy
     volumes:
       - ./proxy/dummy.tkinteractive.com/public_html/:/var/www/dummy.tkinteractive.com/public_html/
@@ -10,7 +10,7 @@ services:
     restart: always
     
   apache2:
-    image: india2022/stageapp-php5:${php5_version:-latest}
+    image: "india2022/stageapp-php5:${php5_version:-latest}"
     build: ./proxy2
     volumes:
       - ./proxy2/hariom.tkinteractive.com/public_html/:/var/www/hariom.tkinteractive.com/public_html/
@@ -18,7 +18,7 @@ services:
     restart: always
    
   reverseproxy:
-    image: india2022/reverse-proxy-apache:${apach_revproxy_version:-latest}
+    image: "india2022/reverse-proxy-apache:${apach_revproxy_version:-latest}"
     build: .
     ports: 
       - 80:80
