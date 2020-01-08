@@ -2,7 +2,6 @@ version: "3.2"
 services:
 
   apache1:
-    env_file: /mnt/data/jenkins/workspace/ansible-deploy/.env
     image: "india2022/stageapp-php7:${php7_version:-latest}"
     container_name: apache-php1
     restart: always
