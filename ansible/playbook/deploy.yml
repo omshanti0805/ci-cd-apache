@@ -14,10 +14,18 @@
       project_src: /home/ubuntu/
       restarted: yes
       build: no
-#   become: yes            ------------- Do not use this!
-    register: output
-  - debug:
-      var: output        
+      detach: false
+    register: docker_container_output
+    #   become: yes            ------------- Do not use this!
+
+  - name: Show test output
+    debug:
+      msg: "{{ docker_container_output.ansible_facts.docker_container.Output }}"
+      
+
+#    register: output
+#  - debug:
+#      var: output        
 
 
 
