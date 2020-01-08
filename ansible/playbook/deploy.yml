@@ -6,7 +6,7 @@
   
   - name: Ansible Docker-Compose file to remote server
     copy:
-      src: /mnt/data/jenkins/workspace/ansible-test/ansible/script/
+      src: /mnt/data/jenkins/workspace/ansible-deploy/ansible/script/
       dest: /home/ubuntu/
       mode: a+w
       force: yes
