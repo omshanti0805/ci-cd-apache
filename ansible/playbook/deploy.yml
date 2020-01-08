@@ -14,7 +14,6 @@
       project_src: /home/ubuntu/
       restarted: yes
       build: no
-      detach: false
     register: docker_container_output
     #   become: yes            ------------- Do not use this!
 
