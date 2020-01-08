@@ -80,7 +80,7 @@
       name: hello-world
       source: pull
   - docker_container:
-      name: hello-world
+      name: hello-world-container
       image: hello-world
       state: started
       detach: false
@@ -89,3 +89,8 @@
   - name: Show test output
     debug:
       msg: "{{ docker_container_output.ansible_facts.docker_container.Output }}"
+      
+  - name: Remove the test container
+    docker_container:
+      state: absent
+      name: hello-world-container
