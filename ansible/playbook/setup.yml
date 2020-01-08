@@ -94,3 +94,13 @@
     docker_container:
       state: absent
       name: hello-world-container
+
+  - name: Docker Compose up
+    docker_compose:
+      project_src: /home/ubuntu/
+      build: no
+      state: present
+    register: output
+    become: true
+  - debug:
+      var: output
