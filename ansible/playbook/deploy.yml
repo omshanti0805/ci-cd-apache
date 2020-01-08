@@ -1,26 +1,26 @@
 ---
 
-- name: Start project containers on app server
+- name: Ansible copy directory to the remote server
   hosts: appserver1
   tasks:
-  
-  - name: Ansible Docker-Compose file to remote server
+  - name: Ansible copy file to remote server
     copy:
       src: /mnt/data/jenkins/workspace/ansible-deploy/ansible/script/
       dest: /home/ubuntu/
       mode: a+w
-      force: yes
-    become: true
-
-  - name: Docker Compose up
+    become: true    
+  - name: Create and start Compose services
     docker_compose:
       project_src: /home/ubuntu/
+      restarted: yes
       build: no
-      state: present
     register: output
-    become: true
+    become: yes
   - debug:
       var: output
+  become: yes          
+
+
 
 #  - name: Prune everything
 #    docker_prune:
@@ -30,5 +30,4 @@
 #  - debug:
 #      var: output
 
-  become: true
 
