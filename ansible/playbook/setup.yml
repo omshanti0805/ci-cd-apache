@@ -73,6 +73,8 @@
         - docker
         - docker-compose
       state: present
+      
+# sudo apt install mongodb-clients -- add this to the installation files as well.
 
 ##### test
 
