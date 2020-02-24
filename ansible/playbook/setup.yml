@@ -1,7 +1,7 @@
 ---
 
 - name: Ansible setup on the remote server
-  hosts: appserver1
+  hosts: appserver_qa
   tasks:  
   
 ##### setup group and user
